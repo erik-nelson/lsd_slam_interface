@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <name>lsd_slam_interface</name>
+  <version>0.0.0</version>
+  <description>The lsd_slam_interface package</description>
+
+  <author email="eanelson@eecs.berkeley.edu">Erik Nelson</author>
+  <maintainer email="eanelson@eecs.berkeley.edu">Erik Nelson</maintainer>
+
+  <license>None</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>lsd_slam_viewer</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>lsd_slam_viewer</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>std_srvs</run_depend>
+
+</package>
