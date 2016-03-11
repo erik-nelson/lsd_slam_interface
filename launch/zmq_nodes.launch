@@ -2,7 +2,7 @@
   <!-- Broadcast poses for syncing with rad data -->
   <node name="pose_broadcaster" pkg="lsd_slam_interface" type="path_listener_zmqBroadcaster.py" output="screen" />
   <!-- Node for broadcasting aggregate cloud -->
-  <node name="pc_broadcaster" pkg="rgbdslam" type="cloudListener_zmqBroadcaster.py" output="screen" />
+  <node name="pc_broadcaster" pkg="lsd_slam_interface" type="cloudListener_zmqBroadcaster.py" output="screen" />
   <!-- Launch detector publisher node -->
 </launch>
 

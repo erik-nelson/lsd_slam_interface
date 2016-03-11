@@ -2,7 +2,6 @@
 import numpy as np
 import os
 #import roslib
-#roslib.load_manifest('rgbdslam')
 import rospy
 import math
 import tf
