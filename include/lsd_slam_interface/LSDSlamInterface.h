@@ -4,7 +4,7 @@
 #include <ros/ros.h>
 #include <lsd_slam_viewer/keyframeMsg.h>
 #include <lsd_slam_viewer/keyframeGraphMsg.h>
-#include <std_srvs/Empty.h>
+#include <lsd_slam_interface/RequestPointCloud.h>
 
 #include <unordered_map>
 
@@ -25,12 +25,10 @@ class LSDSlamInterface {
   void KeyframeCallback(const lsd_slam_viewer::keyframeMsg::ConstPtr& msg);
   void GraphCallback(const lsd_slam_viewer::keyframeGraphMsg::ConstPtr& msg);
 
-#if 0
   // Service for creating point clouds.
-  bool CreatePointCloudService(std_srvs::Empty::Request& req,
-                               std_srvs::Empty::Response& res);
-#endif
-  void CreatePointCloudService(const ros::TimerEvent& ev);
+  bool CreatePointCloudService(
+      lsd_slam_interface::RequestPointCloud::Request& req,
+      lsd_slam_interface::RequestPointCloud::Response& res);
 
   // Structure for pulling information from LSD SLAM's published pose graph.
   struct GraphPose {
@@ -53,7 +51,6 @@ class LSDSlamInterface {
   ros::Subscriber graph_sub_;
   ros::Publisher point_cloud_pub_;
   ros::Publisher pose_pub_;
-  ros::Timer point_cloud_timer_;
   ros::ServiceServer point_cloud_service_;
 
   // The most recent optimized pose graph message for creating point clouds.

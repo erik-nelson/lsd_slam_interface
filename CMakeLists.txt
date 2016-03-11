@@ -6,6 +6,17 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   nav_msgs
+  message_generation
+  std_srvs
+)
+
+add_service_files(
+  FILES
+  RequestPointCloud.srv
+)
+
+generate_messages(
+  DEPENDENCIES
   std_srvs
 )
 
@@ -16,6 +27,7 @@ catkin_package(
     roscpp
     sensor_msgs
     nav_msgs
+    message_runtime
     std_srvs
   DEPENDS
     Eigen3
@@ -51,7 +63,9 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 add_dependencies(${PROJECT_NAME}
-  lsd_slam_viewer_generate_messages_cpp
+  #lsd_slam_viewer_generate_messages_cpp
+  lsd_slam_viewer_gencpp
+  lsd_slam_interface_gencpp
 )
 
 add_executable(${PROJECT_NAME}_node src/${PROJECT_NAME}.cc)

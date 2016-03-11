@@ -47,11 +47,8 @@ bool LSDSlamInterface::RegisterCallbacks(const ros::NodeHandle& n) {
   pose_pub_ =
       nl.advertise<nav_msgs::Path>("poses", 10, false);
 
-  point_cloud_timer_ =
-      nl.createTimer(0.1, &LSDSlamInterface::CreatePointCloudService, this);
-
-  // point_cloud_service_ = nl.advertiseService(
-      // "create_point_cloud", &LSDSlamInterface::CreatePointCloudService, this);
+  point_cloud_service_ = nl.advertiseService(
+      "publish_point_cloud", &LSDSlamInterface::CreatePointCloudService, this);
 
   return true;
 }
@@ -118,11 +115,9 @@ void LSDSlamInterface::GraphCallback(
   pose_pub_.publish(path);
 }
 
-#if 0
-bool LSDSlamInterface::CreatePointCloudService(std_srvs::Empty::Request& req,
-                                               std_srvs::Empty::Response& res) {
-#endif
-void LSDSlamInterface::CreatePointCloudService(const ros::TimerEvent& ev) {
+bool LSDSlamInterface::CreatePointCloudService(
+    lsd_slam_interface::RequestPointCloud::Request& req,
+    lsd_slam_interface::RequestPointCloud::Response& res) {
 
   // Iterate over poses in the optimized pose graph, grabbing a point cloud for
   // each frame and transforming it to world frame. This will create one big
