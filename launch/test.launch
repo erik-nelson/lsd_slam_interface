@@ -1,5 +1,16 @@
 <launch>
 
+  <node pkg="rosbag"
+        type="play"
+        name="rosbag"
+        output="screen"
+        args="/home/eanelson/Desktop/lsdslam_walkround_2016-03-08-15-15-54.bag"/>
+
+  <node pkg="tf"
+        type="static_transform_publisher"
+        name="fixed_to_world"
+        args="0 0 0 0 0 -1.5707 fixed world 30"/>
+
   <node pkg="lsd_slam_interface"
         type="lsd_slam_interface_node"
         name="lsd_slam_interface"
