@@ -128,6 +128,11 @@ bool LSDSlamInterface::CreatePointCloudService(
   sensor_msgs::PointCloud ros_point_cloud;
   ros_point_cloud.header.frame_id = "world";
   ros_point_cloud.header.stamp = ros::Time::now();
+  ros_point_cloud.channels.resize(4);
+  ros_point_cloud.channels[0].name = "red";
+  ros_point_cloud.channels[1].name = "green";
+  ros_point_cloud.channels[2].name = "blue";
+  ros_point_cloud.channels[3].name = "alpha";
 
   for (size_t ii = 0; ii < current_pose_graph_.numFrames; ++ii) {
     const int pose_id = optimized_poses[ii].id;
@@ -207,6 +212,16 @@ bool LSDSlamInterface::CreatePointCloudService(
         ros_point_world.y = point_world(1);
         ros_point_world.z = point_world(2);
         ros_point_cloud.points.push_back(ros_point_world);
+
+        const unsigned char red = point_cloud[col + row * width].color[0];
+        const unsigned char green = point_cloud[col + row * width].color[1];
+        const unsigned char blue = point_cloud[col + row * width].color[2];
+        const unsigned char alpha = point_cloud[col + row * width].color[3];
+
+        ros_point_cloud.channels[0].values.push_back(red);
+        ros_point_cloud.channels[1].values.push_back(green);
+        ros_point_cloud.channels[2].values.push_back(blue);
+        ros_point_cloud.channels[3].values.push_back(alpha);
       }
     }
 
